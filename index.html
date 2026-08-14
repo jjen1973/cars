@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bus | Browse your next car</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav shell">
+        <a class="brand" href="#top" aria-label="bus home"
+          ><img class="brand-mark" src="bus.png" alt=""
+        /></a>
+        <div class="nav-links" id="nav-links">
+          <a href="#top">Home</a>
+          <a class="active" href="#search-form">Find your car</a>
+          <a class="contact" href="#contact-modal">Contact</a>
+        </div>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-controls="nav-links"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
+      </nav>
+      <div class="hero-content shell" id="top">
+        <p class="eyebrow">A better way to find your drive</p>
+        <h1>Browse our cars</h1>
+        <p class="hero-copy">Explore standout models, all in one place.</p>
+        <form class="search" id="search-form">
+          <label class="sr-only" for="search-input"
+            >Search by make or model</label
+          >
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search by make, model or keyword"
+          />
+          <button type="submit" aria-label="Search">&#8594;</button>
+        </form>
+      </div>
+    </header>
+
+    <main id="cars">
+      <section class="results shell">
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow dark">Live vehicle data</p>
+            <h2>Search results<span id="result-count"> (6)</span></h2>
+          </div>
+          <div class="price-filter">
+            <div class="filter-label">
+              <span>Price range</span><strong>$20,000 to $100,000</strong>
+            </div>
+            <input
+              id="price-range"
+              type="range"
+              min="20000"
+              max="100000"
+              value="100000"
+              step="5000"
+              aria-label="Maximum price"
+            />
+            <div class="range-labels"><span>$20k</span><span>$100k</span></div>
+          </div>
+        </div>
+        <p class="api-status" id="api-status">
+          Loading live models from NHTSA...
+        </p>
+        <div class="car-grid" id="car-grid" aria-live="polite"></div>
+        <p class="empty-state" id="empty-state" hidden>
+          No cars match that search.
+        </p>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="shell footer-inner">
+        <div>
+          <span class="brand"
+            ><img class="brand-mark" src="bus.png" alt=""
+          /></span>
+          <p>Find something worth driving.</p>
+        </div>
+      </div>
+    </footer>
+    <div class="contact-modal" id="contact-modal" hidden>
+      <div class="modal-backdrop" data-close-contact></div>
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-title"
+      >
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="Close contact form"
+        >
+          &times;
+        </button>
+        <p class="eyebrow">Get behind the wheel</p>
+        <h2 id="contact-title">Talk to us about your next car</h2>
+        <form class="contact-form" id="contact-form">
+          <label class="sr-only" for="contact-name">Your name</label>
+          <input
+            id="contact-name"
+            name="from_name"
+            type="text"
+            placeholder="Your name"
+            required
+          />
+          <label class="sr-only" for="contact-email">Your email</label>
+          <input
+            id="contact-email"
+            name="reply_to"
+            type="email"
+            placeholder="Your email"
+            required
+          />
+          <label class="sr-only" for="contact-message">Your message</label>
+          <textarea
+            id="contact-message"
+            name="message"
+            placeholder="Your message"
+            rows="4"
+            required
+          ></textarea>
+          <button type="submit">Send message</button>
+          <p class="contact-status" id="contact-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+    <div class="details-modal" id="details-modal" hidden>
+      <div class="modal-backdrop" data-close-details></div>
+      <section
+        class="details-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="details-title"
+      >
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="Close car details"
+          data-close-details
+        >
+          &times;
+        </button>
+        <div class="details-image" id="details-image"></div>
+        <div class="details-content">
+          <p class="eyebrow dark">Vehicle details</p>
+          <h2 id="details-title"></h2>
+          <div class="details-list">
+            <span>Make</span><strong id="details-make"></strong>
+            <span>Model year</span><strong id="details-year"></strong>
+            <span>Estimated price</span><strong id="details-price"></strong>
+            <span>Availability</span><strong>Available to explore</strong>
+          </div>
+          <a class="details-contact" href="#contact-modal"
+            >Ask about this car</a
+          >
+        </div>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
